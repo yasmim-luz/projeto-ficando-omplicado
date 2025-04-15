@@ -1,0 +1,82 @@
+body {
+    font-family: sans-serif;
+    background-color:grey; /* Fundo cinza claro */
+    background-image: url(./assests/pexels-minan1398-1006121.jpg);
+}
+h1{
+    text-align: center;
+    margin: 60px;
+}
+.item {
+
+    background-color: #222; /* Fundo preto */
+    color:orange;
+    padding: 20px;
+    margin-left: 30px;;
+    border-radius: 8px;
+    border-radius:solid red 10px;
+    max-width: 100%;
+    align-items: center;
+    display:block;
+    width: 400px;
+    height: 150px;
+
+}
+
+h2{
+margin-bottom: 10px;
+}
+p{
+    margin-bottom: 20px;
+}
+
+button {
+    background-color:yellow;
+    color:chocolate;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed 100;
+}
+#alinhar{
+    display: flex;
+    justify-content: center;
+ 
+}
+nav {
+    background-color: #333; /* Cor de fundo da barra */
+    color: white; /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+    position: fixed; /* Fixa a barra no topo */
+    top: 0;
+    width: 100%; /* Largura total da tela */
+  }
+  
+  nav ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centraliza os itens */
+  }
+  
+  nav li {
+    display: inline; /* Coloca os itens em linha */
+    margin-right: 20px; /* Espaçamento entre os itens */
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none; /* Remove o sublinhado dos links */
+    background-color:#333;
+    color:chocolate;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+  
+  nav a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+  }
