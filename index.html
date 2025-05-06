@@ -1,27 +1,687 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="arquivo.css">
+    <title>Meu Portfólio</title>
+    <style>
+        /* Variáveis de cores */
+        :root {
+            --cor-primaria: #ff6b6b;
+            --cor-secundaria: #4ecdc4;
+            --cor-destaque: #ffd166;
+            --cor-escura: #2d3436;
+            --cor-clara: #f7f7f7;
+            --cor-aconchegante: #ffb174;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-clara);
+            color: var(--cor-escura);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--cor-primaria);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--cor-escura);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cor-primaria);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin: 4rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--cor-primaria);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--cor-secundaria);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background-color: var(--cor-destaque);
+            color: var(--cor-escura);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--cor-secundaria);
+        }
+
+        .portfolio-info p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--cor-aconchegante);
+            transform: translateY(-2px);
+        }
+
+        .testimonials {
+            background-color: var(--cor-secundaria);
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            color: var(--cor-escura);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(0, 0, 0, 0.07);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--cor-primaria);
+        }
+
+        .contact {
+            background-color: var(--cor-clara);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-secundaria);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--cor-primaria);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--cor-primaria);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--cor-primaria);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--cor-aconchegante);
+        }
+
+        footer {
+            background-color: var(--cor-escura);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--cor-primaria);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="menu">
-        <ul class="menu-lista">
-            <li class="munu-item"><a href="./index.html">Ínicio</a></li>
-            <li class="munu-item"><a href="./sobre.html">Sobre</a></li>
-            <li class="munu-item"><a href="./contato.html">Contato</a></li>
-        </ul>
+    <header>
+        <div class="header-content">
+            <h1>Seu Nome</h1>
+            <p>Designer & Desenvolvedor Criativo</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Portfólio</div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#portfolio">Projetos</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
     </nav>
-    <!-- Aqui começa o conteúdo -->
-    <div class="conteudo">
-        <h1>Bem-vindo ao Menu Simples</h1>
-        <p>Este é um exemplo de menu com uma caixa de conteúdo. O menu é responsivo e possui uma transição
-        suave ao passar o mouse sobre os itens. A caixa de conteúdo está centralizada e possui um visual
-        limpo e moderno. 
-        yasmim gaby
-    </p>
-    </div>
+    
+    <main>
+        <section id="sobre" class="container">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="./tttt.png" alt="Foto de perfil">
+                </div>
+                <div class="about-text">
+                    <h3>Olá, sou Seu Nome!</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel venenatis felis. Donec finibus massa quis arcu malesuada aliquam. Nulla facilisi. Aenean luctus gravida eros, sit amet rutrum leo cursus eget.</p>
+                    <p>Phasellus nec imperdiet mauris, in elementum odio. Fusce euismod, nulla nec tincidunt pretium, ligula felis feugiat urna, eget molestie erat purus ut dui.</p>
+                    <div class="skills">
+                        <span class="skill-tag">Design Gráfico</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Front-end</span>
+                        <span class="skill-tag">CSS/SASS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="portfolio" class="container">
+            <h2>Meus Projetos</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./yog.png" alt="Projeto 1">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Projeto Criativo</h3>
+                        <p>Design de interface para aplicativo de gerenciamento de tarefas com tema colorido e amigável.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./rrrrrrr.webp" alt="Projeto 2">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Website Responsivo</h3>
+                        <p>Desenvolvimento front-end de site com animações suaves e experiência de usuário otimizada.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./Equipe-da-agencia_-Gestor-de-projetos.webp" alt="Projeto 3">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Identidade Visual</h3>
+                        <p>Criação de logo, paleta de cores e materiais de branding para startup inovadora.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./6886544.png" alt="Projeto 4">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Aplicativo Mobile</h3>
+                        <p>Design de interface e prototipagem de aplicativo de delivery com foco em usabilidade.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./101118-revisor-entregar-ate-2806-quartafeira-16h-entenda-o-papel-das-normas-iso-no-gerenciamento-de-projetos-1-dca105c7.jpeg" alt="Projeto 5">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>E-commerce</h3>
+                        <p>Layout e desenvolvimento de loja virtual com foco em conversão e experiência do usuário.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="./1838245.png" alt="Projeto 6">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Dashboard Analítico</h3>
+                        <p>Design de interface para dashboard de análise de dados com visualizações interativas.</p>
+                        <a href="#" class="btn">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="depoimentos" class="testimonials">
+            <div class="container">
+                <h2>O Que Dizem Sobre Mim</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>O trabalho foi entregue com excelência e antes do prazo. A comunicação foi clara e o resultado superou nossas expectativas. Recomendo fortemente!</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/100/100" alt="Cliente 1">
+                            </div>
+                            <div class="author-info">
+                                <h4>Ana Silva</h4>
+                                <p>Diretora de Marketing</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>Um profissional extremamente talentoso e dedicado. Sempre atento aos detalhes e disposto a ir além para entregar um produto de qualidade.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/100/100" alt="Cliente 2">
+                            </div>
+                            <div class="author-info">
+                                <h4>Carlos Oliveira</h4>
+                                <p>CEO, TechStart</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>Criatividade, pontualidade e excelência técnica. Três palavras que definem perfeitamente o trabalho deste profissional incrível.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/100/100" alt="Cliente 3">
+                            </div>
+                            <div class="author-info">
+                                <h4>Mariana Costa</h4>
+                                <p>Designer Sênior</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contato" class="contact container">
+            <h2>Entre em Contato</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Vamos Conversar</h3>
+                    <p>Estou sempre aberto a novos projetos e oportunidades de colaboração. Entre em contato comigo para discutirmos como posso ajudar no seu próximo projeto!</p>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>seuemail@exemplo.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(00) 12345-6789</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Localização</h4>
+                            <p>São Paulo, Brasil</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">LI</a>
+                <a href="#" class="social-link">GH</a>
+                <a href="#" class="social-link">BE</a>
+            </div>
+            <p>&copy; 2025 Seu Nome. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
